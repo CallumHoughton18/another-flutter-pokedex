@@ -6,11 +6,13 @@ class PokemonListView extends StatelessWidget {
   final List<PokemonWithDetails> data;
   final bool isLoadingMore;
   final Widget loadingIcon;
+  final void Function(PokemonWithDetails pokemonWithDetails)? onTap;
   final ScrollController? controller;
   const PokemonListView(
       {super.key,
       required this.data,
       this.controller,
+      this.onTap,
       this.isLoadingMore = false,
       this.loadingIcon = const Center(child: CircularProgressIndicator())});
 
@@ -21,7 +23,11 @@ class PokemonListView extends StatelessWidget {
       slivers: [
         SliverGrid(
             delegate: SliverChildBuilderDelegate(((context, index) {
-              return PokemonListTile(data[index]);
+              return GestureDetector(
+                  onTap: () {
+                    onTap?.call(data[index]);
+                  },
+                  child: PokemonListTile(data[index]));
             }), childCount: data.length),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
