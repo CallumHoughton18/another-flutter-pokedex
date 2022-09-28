@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pokedex/pokemon_list/widgets/pokemon_type_pill.dart';
 import 'package:pokedex/shared/pokeapi/models/pokemon.dart';
 import 'package:pokedex/shared/pokeapi/models/pokemon_with_details.dart';
 import 'package:pokedex/utils/extensions.dart';
 import 'package:pokedex/utils/ui_converters.dart';
+import 'dart:math' as math;
 
 import '../../configurations/colors.dart';
 
@@ -26,6 +28,20 @@ class LargePokemonTile extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Positioned(
+                left: -140,
+                bottom: -180,
+                child: Transform.rotate(
+                  angle: -math.pi / 4,
+                  child: Opacity(
+                    opacity: 0.15,
+                    child: SvgPicture.asset(
+                      "assets/pokeball.svg",
+                      color: Colors.white,
+                      width: 330,
+                    ),
+                  ),
+                )),
+            Positioned(
               bottom: -40,
               right: -40,
               child: Hero(
@@ -33,7 +49,7 @@ class LargePokemonTile extends StatelessWidget {
                 child: Image.network(
                   pokemonWithDetails.pokemon.spriteUrl,
                   fit: BoxFit.fitHeight,
-                  width: 300,
+                  width: 280,
                 ),
               ),
             ),
