@@ -34,4 +34,5 @@ class AppColors {
   static const Color semiGrey = Color(0xFFbababa);
   static const Color blueGrey = Color(0xFF5a8fa4);
   static const Color violet = Color(0xD07038F8);
+  static const Color offWhite = Color.fromARGB(255, 235, 233, 233);
 }

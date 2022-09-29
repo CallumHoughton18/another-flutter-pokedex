@@ -34,6 +34,7 @@ class PokemonDetails {
   final int experience;
   final String spriteUrl;
   final int height;
+  final int weight;
   final List<PokemonTypes> types;
   final List<Stat> stats;
 
@@ -41,6 +42,7 @@ class PokemonDetails {
       : experience = json['base_experience'],
         spriteUrl = json['sprites']['front_default'],
         height = json['height'],
+        weight = json['weight'],
         types = (json['types'] as List)
             .map((type) => PokemonTypes.values.firstWhere(
                 (e) => e.toString() == 'PokemonTypes.' + type['type']['name'],
