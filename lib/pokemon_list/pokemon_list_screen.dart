@@ -45,7 +45,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
     return BlocBuilder<PokemonCubit, PokemonState>(builder: (context, state) {
       if (state.loadingStatus == LoadingStatus.initial) {
         return Center(
-            child: Lottie.asset("assets/pokeball_loading.json", height: 125));
+            child: Lottie.asset("assets/pokeball_loading.json", height: 70));
       } else {
         return PokemonListView(
           data: state.pokemon,
