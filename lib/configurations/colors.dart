@@ -28,11 +28,12 @@ class AppColors {
   static const Color pink = Color(0xFFF85888);
   static const Color purple = Color(0xFF7C538C);
   static const Color red = Color(0xFFFA6555);
-  static const Color darkRed = Color(0xFFe12c6a);
+  static const Color deepRed = Color(0xFFe12c6a);
   static const Color teal = Color(0xFF4FC1A6);
   static const Color yellow = Color.fromARGB(255, 241, 196, 69);
   static const Color semiGrey = Color(0xFFbababa);
   static const Color blueGrey = Color(0xFF5a8fa4);
   static const Color violet = Color(0xD07038F8);
   static const Color offWhite = Color.fromARGB(255, 235, 233, 233);
+  static const Color orange = Color(0xFFFF983F);
 }

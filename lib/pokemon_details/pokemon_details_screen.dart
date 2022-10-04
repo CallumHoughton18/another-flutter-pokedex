@@ -8,11 +8,13 @@ import 'package:pokedex/pokemon_list/widgets/pokemon_list_tile.dart';
 import 'package:pokedex/shared/pokeapi/models/pokemon.dart';
 import 'package:pokedex/shared/pokeapi/models/pokemon_with_details.dart';
 import 'package:pokedex/utils/extended_math.dart';
+import 'package:pokedex/utils/extensions.dart';
 
 import '../utils/ui_converters.dart';
 
 class PokemonDetailsScreen extends StatelessWidget {
   final PokemonWithDetails pokemonWithDetails;
+
   const PokemonDetailsScreen(this.pokemonWithDetails, {super.key});
 
   @override
@@ -24,9 +26,11 @@ class PokemonDetailsScreen extends StatelessWidget {
         LargePokemonTile(pokemonWithDetails),
         Expanded(
           child: BottomSheet(
+              enableDrag: false,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.horizontal(
-                      left: Radius.circular(30), right: Radius.circular(30))),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30))),
               onClosing: () => {},
               builder: ((context) {
                 return Container(
@@ -68,8 +72,8 @@ class PokemonDetailsScreen extends StatelessWidget {
                   DetailsLabel('Height'),
                   SizedBox(height: 11),
                   Text(
-                    pokemonWithDetails.details.height.toString(),
-                    style: TextStyle(
+                    "${(pokemonWithDetails.details.height / 10)} m",
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
@@ -77,7 +81,7 @@ class PokemonDetailsScreen extends StatelessWidget {
                 ],
               ),
             ),
-            VerticalDivider(
+            const VerticalDivider(
               thickness: 1.5,
               color: AppColors.offWhite,
             ),
@@ -86,10 +90,10 @@ class PokemonDetailsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  DetailsLabel('Weight'),
-                  SizedBox(height: 11),
-                  Text(pokemonWithDetails.details.weight.toString(),
-                      style: TextStyle(
+                  const DetailsLabel('Weight'),
+                  const SizedBox(height: 11),
+                  Text("${pokemonWithDetails.details.weight / 10} kg",
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ))
@@ -116,34 +120,100 @@ class PokemonDetailsScreen extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: AppColors.normalGrey)),
         SizedBox(height: 30),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text("Base XP",
-                style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.grey)),
-            SizedBox(width: 20),
-            Text(pokemonWithDetails.details.experience.toString(),
-                style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.darkGrey)),
-            SizedBox(width: 20),
-            Expanded(
-              child: LinearProgressIndicator(
-                value: ExtendedMath.normalize(
-                    pokemonWithDetails.details.experience.toDouble(), 0, 500),
-                backgroundColor: AppColors.offWhite,
-                valueColor: AlwaysStoppedAnimation(AppColors.lightYellow),
-              ),
-            ),
-          ],
+        StatBar(
+          label: "Base XP",
+          value: pokemonWithDetails.details.experience,
+          maxValue: 500,
+          progressBarColor: AppColors.lightYellow,
+          labelFlex: 2,
+          valueFlex: 1,
+          progressBarFlex: 5,
         ),
         SizedBox(height: 20),
-        Container(width: 300, child: _buildPokemonWeightAndHeightCard(context))
+        Container(width: 300, child: _buildPokemonWeightAndHeightCard(context)),
+        SizedBox(height: 20),
+        Row(
+          children: [
+            Text("Base Stats",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))
+          ],
+        ),
+        SizedBox(height: 10),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: pokemonWithDetails.details.stats.map((stat) {
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+              child: StatBar(
+                label: UIConverters.capitalizePokemonLabel(stat.statName),
+                value: stat.baseStat,
+                maxValue: 110,
+                progressBarColor: UIConverters.baseStatToColor(stat.baseStat),
+                labelFlex: 3,
+                valueFlex: 1,
+                progressBarFlex: 4,
+              ),
+            );
+          }).toList(),
+        )
+      ],
+    );
+  }
+}
+
+class StatBar extends StatelessWidget {
+  const StatBar(
+      {Key? key,
+      required this.label,
+      required this.value,
+      required this.maxValue,
+      required this.progressBarColor,
+      required this.labelFlex,
+      required this.valueFlex,
+      required this.progressBarFlex})
+      : super(key: key);
+
+  final String label;
+  final int value;
+  final int maxValue;
+  final Color progressBarColor;
+  final int labelFlex;
+  final int valueFlex;
+  final int progressBarFlex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: labelFlex,
+          child: Text(label,
+              style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.grey)),
+        ),
+        Expanded(
+          flex: valueFlex,
+          child: Text(value.toString(),
+              style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.darkGrey)),
+        ),
+        Expanded(
+          flex: progressBarFlex,
+          child: LinearProgressIndicator(
+            value: ExtendedMath.normalize(
+                value.toDouble(), 0, maxValue.toDouble()),
+            backgroundColor: AppColors.offWhite,
+            valueColor: AlwaysStoppedAnimation(progressBarColor),
+          ),
+        ),
       ],
     );
   }

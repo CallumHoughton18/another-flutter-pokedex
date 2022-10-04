@@ -29,7 +29,7 @@ class PokemonTypePill extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: UIConverters.PokemonTypeToColor(type)),
               child: SvgPicture.asset(
-                UIConverters.PokemonTypeToSvgPath(type),
+                UIConverters.pokemonTypeToSvgPath(type),
               ),
             ),
             const SizedBox(width: 5),

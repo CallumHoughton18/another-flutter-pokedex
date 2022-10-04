@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/configurations/colors.dart';
 import 'package:pokedex/configurations/theme.dart';
 import 'package:pokedex/pokemon_list/pokemon_list_screen.dart';
 import 'package:pokedex/shared/pokeapi/cubit/pokemon_cubit.dart';
 import 'package:pokedex/shared/pokeapi/web_pokeapi.dart';
+import 'package:pokedex/widgets/main_app_bar.dart';
 
 void main() {
   runApp(const PokedexApp());
@@ -22,7 +24,6 @@ class PokedexApp extends StatelessWidget {
         home: BlocProvider(
             create: (context) => PokemonCubit(WebPokeApi()),
             child: Scaffold(
-                appBar: AppBar(title: const Text("Pokedex!")),
-                body: const PokemonListScreen())));
+                appBar: MainAppBar(), body: const PokemonListScreen())));
   }
 }

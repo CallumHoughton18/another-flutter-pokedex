@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:pokedex/configurations/colors.dart';
 import 'package:pokedex/shared/pokeapi/models/details.dart';
+import 'package:pokedex/utils/extensions.dart';
 
 class UIConverters {
   static Color PokemonTypeToColor(PokemonTypes type) {
@@ -19,7 +20,7 @@ class UIConverters {
       case PokemonTypes.ice:
         return AppColors.lightTeal;
       case PokemonTypes.fighting:
-        return AppColors.darkRed;
+        return AppColors.deepRed;
       case PokemonTypes.poison:
         return AppColors.purple;
       case PokemonTypes.ground:
@@ -44,7 +45,24 @@ class UIConverters {
     }
   }
 
-  static String PokemonTypeToSvgPath(PokemonTypes type) {
+  static String pokemonTypeToSvgPath(PokemonTypes type) {
     return "assets/pokemon_type_svgs/${type.toShortString()}.svg";
+  }
+
+  static String capitalizePokemonLabel(String value) {
+    if (value.length < 3) {
+      return value.toUpperCase();
+    }
+    return value.split(RegExp('[ -]')).map((str) => str.capitalize()).join(' ');
+  }
+
+  static Color baseStatToColor(int baseStat) {
+    if (baseStat < 50) {
+      return AppColors.red;
+    } else if (baseStat < 70) {
+      return AppColors.orange;
+    } else {
+      return AppColors.lightGreen;
+    }
   }
 }
