@@ -4,13 +4,13 @@ import 'package:lottie/lottie.dart';
 import 'package:pokedex/pokemon_details/pokemon_details_screen.dart';
 import 'package:pokedex/pokemon_list/widgets/pokemon_list_view.dart';
 import 'package:pokedex/shared/pokeapi/models/pokemon_with_details.dart';
+import 'package:pokedex/utils/ui_converters.dart';
 import 'package:pokedex/widgets/main_app_bar.dart';
 import '../shared/pokeapi/cubit/pokemon_cubit.dart';
 
 class PokemonListScreen extends StatefulWidget {
   const PokemonListScreen({super.key});
 
-  // TODO: handle errors, add loading icon, fix if element cannot scorll, load in more
   @override
   State<PokemonListScreen> createState() => _PokemonListScreenState();
 }
@@ -82,7 +82,10 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
         transitionDuration: const Duration(milliseconds: 300),
         reverseTransitionDuration: const Duration(milliseconds: 300),
         pageBuilder: (context, animation, secondaryAnimation) => Scaffold(
-            appBar: MainAppBar(),
+            appBar: AppBar(
+                backgroundColor: UIConverters.PokemonTypeToColor(
+                    pokemonWithDetails.details.types[0]),
+                elevation: 0),
             body: PokemonDetailsScreen(pokemonWithDetails))));
   }
 

@@ -45,6 +45,7 @@ class PokemonListTile extends StatelessWidget {
                   Text(pokemonWithDetails.pokemon.name.capitalize(),
                       style: const TextStyle(
                           fontSize: 24,
+                          overflow: TextOverflow.ellipsis,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w700,
                           color: AppColors.whiteGrey)),

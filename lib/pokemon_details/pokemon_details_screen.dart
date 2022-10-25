@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:pokedex/configurations/colors.dart';
 import 'package:pokedex/pokemon_details/widgets/details_label.dart';
 import 'package:pokedex/pokemon_details/widgets/large_pokemon_tile.dart';
-import 'package:pokedex/pokemon_list/widgets/pokemon_list_tile.dart';
-import 'package:pokedex/shared/pokeapi/models/pokemon.dart';
 import 'package:pokedex/shared/pokeapi/models/pokemon_with_details.dart';
 import 'package:pokedex/utils/extended_math.dart';
-import 'package:pokedex/utils/extensions.dart';
 
 import '../utils/ui_converters.dart';
 
