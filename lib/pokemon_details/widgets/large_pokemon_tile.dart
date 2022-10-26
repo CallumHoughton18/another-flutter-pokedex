@@ -20,7 +20,7 @@ class LargePokemonTile extends StatelessWidget {
       clipBehavior: Clip.none,
       height: 300,
       decoration: BoxDecoration(
-          color: UIConverters.PokemonTypeToColor(
+          color: UIConverters.pokemonTypeToColor(
               pokemonWithDetails.details.types[0])),
       child: Padding(
         padding: const EdgeInsets.all(16),

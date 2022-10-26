@@ -17,7 +17,7 @@ class PokemonListTile extends StatelessWidget {
       key: key,
       clipBehavior: Clip.none,
       decoration: BoxDecoration(
-          color: UIConverters.PokemonTypeToColor(
+          color: UIConverters.pokemonTypeToColor(
               pokemonWithDetails.details.types[0]),
           borderRadius: BorderRadius.circular(20)),
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

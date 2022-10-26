@@ -27,7 +27,7 @@ class PokemonTypePill extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: UIConverters.PokemonTypeToColor(type)),
+                  color: UIConverters.pokemonTypeToColor(type)),
               child: SvgPicture.asset(
                 UIConverters.pokemonTypeToSvgPath(type),
               ),

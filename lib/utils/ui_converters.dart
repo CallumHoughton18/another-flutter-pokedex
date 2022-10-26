@@ -5,7 +5,7 @@ import 'package:pokedex/shared/pokeapi/models/details.dart';
 import 'package:pokedex/utils/extensions.dart';
 
 class UIConverters {
-  static Color PokemonTypeToColor(PokemonTypes type) {
+  static Color pokemonTypeToColor(PokemonTypes type) {
     switch (type) {
       case PokemonTypes.normal:
         return AppColors.normalGrey;

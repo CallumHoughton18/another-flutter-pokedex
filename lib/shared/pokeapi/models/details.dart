@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:pokedex/configurations/colors.dart';
 import 'package:pokedex/shared/pokeapi/models/stats.dart';
 
 enum PokemonTypes {
@@ -45,7 +42,7 @@ class PokemonDetails {
         weight = json['weight'],
         types = (json['types'] as List)
             .map((type) => PokemonTypes.values.firstWhere(
-                (e) => e.toString() == 'PokemonTypes.' + type['type']['name'],
+                (e) => e.toString() == 'PokemonTypes.${type['type']['name']}',
                 orElse: () => PokemonTypes.normal))
             .toList(),
         stats = (json['stats'] as List)

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/configurations/colors.dart';
 import 'package:pokedex/configurations/theme.dart';
 import 'package:pokedex/pokemon_list/pokemon_list_screen.dart';
 import 'package:pokedex/shared/pokeapi/cubit/pokemon_cubit.dart';
