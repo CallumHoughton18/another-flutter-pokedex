@@ -17,29 +17,35 @@ class PokemonDetailsScreen extends StatelessWidget {
       child: Column(children: [
         LargePokemonTile(pokemonWithDetails),
         Expanded(
+          flex: 1,
           child: DraggableScrollableSheet(
             initialChildSize: 1,
             minChildSize: 1,
             builder: (context, scrollController) {
-              return SingleChildScrollView(
-                  clipBehavior: Clip.none,
-                  controller: scrollController,
-                  child: BottomSheet(
-                      enableDrag: false,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30))),
-                      onClosing: () => {},
-                      builder: ((context) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 16),
-                          child: PokemonStatDetails(
-                            pokemonWithDetails: pokemonWithDetails,
-                          ),
-                        );
-                      })));
+              return CustomScrollView(
+                clipBehavior: Clip.none,
+                controller: scrollController,
+                slivers: [
+                  SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: BottomSheet(
+                          enableDrag: false,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30))),
+                          onClosing: () => {},
+                          builder: ((context) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 16),
+                              child: PokemonStatDetails(
+                                pokemonWithDetails: pokemonWithDetails,
+                              ),
+                            );
+                          })))
+                ],
+              );
             },
           ),
         )
